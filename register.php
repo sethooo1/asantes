@@ -39,18 +39,22 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Trending</a>
           <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
+            <a class="dropdown-item" href="#">Ghana</a>
+            <a class="dropdown-item" href="#">Nigeria</a>
+            <a class="dropdown-item" href="#">Benin</a>
+            <a class="dropdown-item" href="#">South Africa</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Separated link</a>
+            <a class="dropdown-item" href="#">Other Countries</a>
           </div>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Artits</a>
+          <a class="nav-link" href="#">Artists</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Auctions</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="about.php">About Us</a>
         </li>
 
       </ul>
