@@ -25,7 +25,7 @@
     <!-- Beginning : Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <a class="navbar-brand" href="index">
-        <img src="icon/logo.png" width="200" height="60" alt="" loading="lazy">
+        <img src="icon/logo222.png" width="200" height="70" alt="" loading="lazy">
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
