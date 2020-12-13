@@ -1,9 +1,16 @@
+<?php require_once("../private/initialize.php"); ?>
+<?php $page_title = "Home Page"; ?>
+<?php include(SHARED_PATH . '/header.php'); ?>
+<?php $arts = Art::find_all(); ?>
+
 <?php
-  require_once("../includes/initialize.php");
+$sql = "SELECT * FROM users";
+$result = $database->query($sql);
+$row = $result->fetch_assoc();
+$result->free();
+
+echo "Name: " . $row['first_name'] ." ". $row['last_name'];
  ?>
-
-<?php include_layout_template('header.php') ?>
-
     <!-- Beginning : Carousel without writings so that we can edit Full pictures and use for the carousel -->
     <div class="container-lg mt-3">
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -14,13 +21,13 @@
       </ol>
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img src="img/354.jpg" class="d-block w-100 img-fluid" alt="...">
+          <img src="images/img/354.jpg" class="d-block w-100 img-fluid" alt="...">
         </div>
         <div class="carousel-item">
-          <img src="img/354.jpg" class="d-block w-100" alt="...">
+          <img src="images/img/354.jpg" class="d-block w-100" alt="...">
         </div>
         <div class="carousel-item">
-          <img src="img/354.jpg" class="d-block w-100" alt="...">
+          <img src="images/img/354.jpg" class="d-block w-100" alt="...">
         </div>
       </div>
       <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -44,83 +51,27 @@
 
     <!-- Trending Beginning : Main Container Starts with Cards of pics -->
 
-      <div class="card-deck">
-        <div class="card" style="width: 18rem;">
-          <img src="img/c1.jpg" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            <div class="card-footer">
-              <small class="text-muted">Last updated 3 mins ago</small>
-            </div>
-          </div>
-        </div>
-        <div class="card" style="width: 18rem;">
-          <img src="img/c1.jpg" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-            <div class="card-footer">
-              <small class="text-muted">Last updated 3 mins ago</small>
-            </div>
-          </div>
-        </div>
-        <div class="card" style="width: 18rem;">
-          <img src="img/c1.jpg" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-            <div class="card-footer">
-              <small class="text-muted">Last updated 3 mins ago</small>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <div class="card-deck mt-5">
+        <?php foreach ($arts as $art) {?>
+        <?php $photos = Photograph::find_photo_on($art->id); ?>
         <div class="card" style="width: 18rem;">
-          <img src="img/c2.jpg" class="card-img-top" alt="...">
+          <img src="images/arts/<?php echo $photos->filename; ?>" class="card-img-top" alt="...">
           <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
+            <h5 class="card-title"><?php echo h($art->name); ?></h5>
+            <p class="card-text">$<?php echo h($art->price); ?> USD</p>
+            <?php $artist = Artist::find_by_id($art->artist_id); ?>
+            <footer class="blockquote-footer">By <cite title="Source Title"><?php echo h($artist->full_name()); ?></cite></footer>
+            <div class="btn-group mt-2 mb-2" role="group">
+              <a href="art_detail.php?id=<?php echo $art->id; ?>" class="btn btn-outline-primary">View</a>
+              <a href="checkout.php" class="btn btn-outline-success">Add to Cart</a>
+            </div>
             <div class="card-footer">
               <small class="text-muted">Last updated 3 mins ago</small>
             </div>
           </div>
         </div>
-        <div class="card" style="width: 18rem;">
-          <img src="img/c3.jpg" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-            <div class="card-footer">
-              <small class="text-muted">Last updated 3 mins ago</small>
-            </div>
-          </div>
-        </div>
-        <div class="card" style="width: 18rem;">
-          <img src="img/c4.jpg" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-            <div class="card-footer">
-              <small class="text-muted">Last updated 3 mins ago</small>
-            </div>
-          </div>
-        </div>
+        <?php } ?>
       </div>
     </div>
 
-    <?php include_layout_template('footer.php') ?>
+    <?php include(SHARED_PATH . '/footer.php'); ?>

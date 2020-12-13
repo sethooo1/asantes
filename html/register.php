@@ -1,76 +1,31 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<?php require_once("../private/initialize.php"); ?>
+<?php $page_title = "Register"; ?>
+<?php include(SHARED_PATH . '/header.php'); ?>
+<?php
+$max_file_size = 1048576; //exprssed in bytes =10MB
+if(is_post_request()) {
 
-    <!-- Favicon -->
-    <link rel="icon" href="icon.ico">
+  // Create record using post parameters
+  $args = $_POST['customer'];
+  $customer = new Customer($args);
+  print_r($customer);
+  print_r($customer->save());
+  $result = $customer->save();
+  print_r($result);
 
+  if($result === true) {
+    $new_id = $customer->id;
+    $session->message('The customer was created successfully.');
+    redirect_to(url_for('/customer/index.php?id=' . $new_id));
+  } else {
+    // show errors
+  }
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="bootstrap-4.5.3/dist/css/bootstrap.css">
-
-    <!--Fontawesome CSS -->
-    <link rel="stylesheet" href="fontawesome-free-5.15.1-web/css/all.css">
-
-    <title>azantes</title>
-  </head>
-
-  <body>
-
-
-
-    <!-- Beginning : Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="index.php">
-        <img src="icon/logo222.png" width="200" height="70" alt="" loading="lazy">
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a class="nav-link active" href="index.php">Home</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Trending</a>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Ghana</a>
-            <a class="dropdown-item" href="#">Nigeria</a>
-            <a class="dropdown-item" href="#">Benin</a>
-            <a class="dropdown-item" href="#">South Africa</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Other Countries</a>
-          </div>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Artists</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Auctions</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="about.php">About Us</a>
-        </li>
-
-      </ul>
-      <!-- Beginning : Search Form in Nav -->
-      <form class="form-inline mr-2 ml-2">
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
-          </div>
-          <input type="text" class="form-control" placeholder="Search Authentic African Art/Objects" aria-label="Search" aria-describedby="basic-addon1">
-        </div>
-      </form>
-
-      <!-- Ending : Search Form in Nav -->
-    </div>
-</nav>
+} else {
+  // display the form
+  $customer = new Customer;
+}
+ ?>
 
 
     <!-- Form Beginning : The start of the registration form -->
@@ -78,57 +33,38 @@
       <h6 class="lead display-3 mt-5">Create your online account</h6>
     <hr class="mt-2 mb-5"/>
 
+    <?php echo display_errors($customer->errors); ?>
+    <form class="" action="register.php" method="post">
+      <dl>
+        <dt>First name</dt>
+        <dd><input type="text" name="customer[first_name]" value="<?php echo h($customer->first_name); ?>" /></dd>
+      </dl>
 
-    <form class="" action="index.html" method="post">
-      <div class="row">
-      <div class="form-group col-2">
-        <label for="title">Title</label>
-        <select class="form-control">
-          <option>Mr</option>
-          <option>Dr</option>
-          <option>Sir</option>
-          <option>Mrs</option>
-          <option>Miss</option>
-        </select>
-      </div>
-      <div class="form-group col-6 ml-auto">
-        <label for="email">Email Address</label>
-        <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
-        <small id="emailHelp" class="form-text text-muted"></small>
-      </div>
-      </div>
-      <div class="row">
-      <div class="form-group col">
-        <label for="firstname">First Name</label>
-        <input type="firstname" class="form-control" id="firstname" aria-describedby="firstnameHelp">
-        <small id="emailHelp" class="form-text text-muted"></small>
-      </div>
+      <dl>
+        <dt>Last name</dt>
+        <dd><input type="text" name="customer[last_name]" value="<?php echo h($customer->last_name); ?>" /></dd>
+      </dl>
 
-      <div class="form-group col">
-        <label for="password">Password</label>
-        <input type="password" class="form-control" id="password">
-      </div>
-    </div>
-    <div class="row">
-    <div class="form-group col">
-      <label for="lastname">Last Name</label>
-      <input type="lastname" class="form-control" id="lastname" aria-describedby="lastnameHelp">
-      <small id="emailHelp" class="form-text text-muted"></small>
-    </div>
-    <div class="form-group col">
-      <label for="lastname">Retype Password</label>
-      <input type="lastname" class="form-control" id="lastname">
-    </div>
-  </div>
-      <div class="form-group form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">Yes, I would like to receive email communications from azantes</label>
-      </div>
-      <div class="form-group form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">I have read and agree to the Terms and Conditions and Privacy Policy</label>
-      </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <dl>
+        <dt>Email</dt>
+        <dd><input type="text" name="customer[email]" value="<?php echo h($customer->email); ?>" /></dd>
+      </dl>
+
+      <dl>
+        <dt>Username</dt>
+        <dd><input type="text" name="customer[username]" value="<?php echo h($customer->username); ?>" /></dd>
+      </dl>
+
+      <dl>
+        <dt>Password</dt>
+        <dd><input type="password" name="customer[password]" value="" /></dd>
+      </dl>
+
+      <dl>
+        <dt>Confirm Password</dt>
+        <dd><input type="password" name="customer[confirm_password]" value="" /></dd>
+      </dl>
+      <input type="submit" name="submit" value="Submit">
 
     </form>
 
