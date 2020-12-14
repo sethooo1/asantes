@@ -13,6 +13,18 @@ function require_login()
   }
 }
 
+function customer_require_login()
+{
+  // This function checks for login
+  global $session;
+  if (!$session->customer_is_logged_in()) {
+    // Checking to see if user is logged in
+    redirect_to(url_for('/login.php'));
+  } else {
+    // Do nothing let the rest of the page proceed
+  }
+}
+
 
 function display_errors($errors=array()) {
   $output = '';

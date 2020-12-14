@@ -8,10 +8,7 @@ if(is_post_request()) {
   // Create record using post parameters
   $args = $_POST['customer'];
   $customer = new Customer($args);
-  print_r($customer);
-  print_r($customer->save());
   $result = $customer->save();
-  print_r($result);
 
   if($result === true) {
     $new_id = $customer->id;

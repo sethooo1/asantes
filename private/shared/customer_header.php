@@ -13,10 +13,10 @@
 
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="<?php echo url_for('/stylesheets/bootstrap-4.5.3/dist/css/bootstrap.css'); ?>"/>
+    <link rel="stylesheet" href="<?php echo url_for('../stylesheets/bootstrap-4.5.3/dist/css/bootstrap.css'); ?>"/>
 
     <!--Fontawesome CSS -->
-    <link rel="stylesheet" href="<?php echo url_for('/stylesheets/fontawesome-free-5.15.1-web/css/all.css'); ?>"/>
+    <link rel="stylesheet" href="<?php echo url_for('../stylesheets/fontawesome-free-5.15.1-web/css/all.css'); ?>"/>
 
     <title>azantes - <?php echo $page_title; ?> </title>
   </head>
@@ -61,7 +61,7 @@
 
 
         <!-- Beginning : Login Button in Nav triggering a Modal -->
-        <a href="login.php" class="btn btn-dark mr-2 ml-2">Login</a>
+        <a href="../logout.php" class="btn btn-dark mr-2 ml-2">Logout</a>
         <!-- Ending : Login and Register Buttons in Nav -->
 
       </ul>
